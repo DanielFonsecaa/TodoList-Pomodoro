@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ITask } from "../Interface";
 import TodoTask from "../Components/TodoTask";
 
