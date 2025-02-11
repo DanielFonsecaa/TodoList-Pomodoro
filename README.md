@@ -27,31 +27,19 @@ The app is deployed and can be accessed at:
 
 To run this project locally:
 
-1. Clone this repository:
-
-   ```bash
-   git clone <repository-url>
-   ```
-
-2. Navigate to the project directory:
-
-   ```bash
-   cd <project-directory>
-   ```
-
-3. Install the dependencies:
+1. Install the dependencies:
 
    ```bash
    npm install
    ```
 
-4. Start the development server:
+2. Start the development server:
 
    ```bash
    npm run dev
    ```
 
-5. Open the application in your browser at http://localhost:3000.
+3. Open the application in your browser at http://localhost:3000.
 
 ## Usage
 
