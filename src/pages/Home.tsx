@@ -100,7 +100,7 @@ const Home = () => {
             <input
               className="w-25 outline-0 border-b-2 border-transparent focus:border-purple-500 transition-all duration-300"
               type="text"
-              placeholder="Task name"
+              placeholder="Name"
               value={task}
               onChange={(e) => setTask(e.target.value)}
             />
@@ -121,7 +121,7 @@ const Home = () => {
             <input
               className="w-25 outline-0 border-b-2 border-transparent focus:border-purple-500 transition-all duration-300"
               type="string"
-              placeholder="Description"
+              placeholder="Long Description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -137,21 +137,23 @@ const Home = () => {
       </div>
 
       <div className="h-64 sm:h-100 overflow-auto">
-        <table className="table-auto w-full">
+        <table className="table-auto w-full divide-y divide-black border-collapse">
           <thead>
             <tr className="">
-              <th className=" px-4 py-2">Task Name</th>
-              <th className=" px-4 py-2">Deadline</th>
+              <th className="border-r px-4 py-2">Task Name</th>
+              <th className="border-r px-4 py-2">Deadline</th>
               <th className="px-4 py-2"></th>
             </tr>
           </thead>
           <tbody>
             {todoList.map((task: ITask, key: number) => (
-              <tr key={key} className="w-3 odd:bg-white even:bg-gray-100">
+              <tr key={key} className="odd:bg-white even:bg-purple-100">
                 <TodoTask
                   task={task}
                   completionOrDeleteTask={completeTask}
-                  viewTask={() => viewTask(task)}
+                  viewTask={
+                    task.description?.trim() ? () => viewTask(task) : () => {}
+                  }
                   isCompleteAction={true}
                 />
               </tr>
@@ -161,8 +163,8 @@ const Home = () => {
       </div>
 
       {hasPopup && (
-        <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
-          <div className="bg-white p-5 rounded-lg shadow-lg">
+        <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 bg-black/45 ">
+          <div className="bg-white p-5 rounded-lg shadow-lg shadow-purple-500">
             <p>{popupMessage}</p>
             <button
               onClick={() => setHasPopup(false)}
@@ -174,8 +176,8 @@ const Home = () => {
         </div>
       )}
       {selectTask && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white p-5 rounded-lg shadow-lg flex flex-col gap-6">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/45 ">
+          <div className="bg-white p-5 rounded-lg shadow-lg shadow-purple-500 flex flex-col gap-6">
             <h1 className="font-bold text-3xl">Task Details</h1>
             <div className="flex flex-col">
               <div className="">

@@ -2,8 +2,6 @@
 
 :root {
   height: 100%;
-  background-image: url("https://kaapimachines.com/wp-content/uploads/2019/08/espresso-shot-and-coffee-beans-2021-08-27-19-35-18-utc.webp");
-  background-repeat: repeat-y;
-  background-position: left;
-  background-size: cover;
+  background-image: url("/public/background.png");
+  background-repeat: repeat;
 }

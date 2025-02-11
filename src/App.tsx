@@ -10,7 +10,7 @@ function App() {
         <NavBar></NavBar>
         <SideBar></SideBar>
       </div>
-      <div className="h-[30em]">
+      <div className="h-[30em] m-10">
         <Outlet></Outlet>
       </div>
 

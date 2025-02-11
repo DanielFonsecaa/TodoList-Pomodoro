@@ -33,18 +33,18 @@ const CompleteTask = () => {
   }, []);
 
   return (
-    <div className="m-auto w-full h-full overflow-auto mt-5">
-      <table className="table-auto w-full">
+    <div className="m-auto w-full h-full overflow-auto">
+      <table className="table-auto w-full divide-y divide-black">
         <thead>
           <tr className="">
-            <th className=" px-4 py-2">Task Name</th>
-            <th className=" px-4 py-2">Deadline</th>
+            <th className="border-r px-4 py-2">Task Name</th>
+            <th className="border-r px-4 py-2">Deadline</th>
             <th className="px-4 py-2"></th>
           </tr>
         </thead>
         <tbody>
           {todoList.map((task: ITask, key: number) => (
-            <tr key={key} className="odd:bg-white even:bg-gray-100">
+            <tr key={key} className=" odd:bg-white even:bg-purple-100">
               <TodoTask
                 task={task}
                 completionOrDeleteTask={deleteTask}
@@ -56,8 +56,8 @@ const CompleteTask = () => {
         </tbody>
       </table>
       {selectTask && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white p-5 rounded-lg shadow-lg flex flex-col gap-6">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/45">
+          <div className="bg-white p-5 rounded-lg shadow-lg shadow-purple-500 flex flex-col gap-6">
             <h1 className="font-bold text-3xl">Task Details</h1>
             <div className="flex flex-col">
               <div className="">
