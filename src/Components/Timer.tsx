@@ -96,7 +96,7 @@ const Timer = () => {
               setIsPaused(false);
               isPausedRef.current = false;
             }}
-            className="bg-purple-500 text-white rounded-lg hover:bg-purple-700 active:bg-purple-300 p-4"
+            className="cursor-pointer bg-purple-500 text-white rounded-lg hover:bg-purple-700 active:bg-purple-300 p-4"
           >
             Start
           </button>
@@ -106,7 +106,7 @@ const Timer = () => {
               setIsPaused(true);
               isPausedRef.current = true;
             }}
-            className="bg-purple-500 text-white rounded-lg hover:bg-purple-700  active:bg-purple-300 p-4"
+            className="cursor-pointer bg-purple-500 text-white rounded-lg hover:bg-purple-700  active:bg-purple-300 p-4"
           >
             Pause
           </button>
@@ -120,7 +120,7 @@ const Timer = () => {
             setIsPaused(true);
             isPausedRef.current = true;
           }}
-          className="bg-purple-500 text-white rounded-lg hover:bg-purple-700  active:bg-purple-300 p-4"
+          className="cursor-pointer bg-purple-500 text-white rounded-lg hover:bg-purple-700  active:bg-purple-300 p-4"
         >
           Reset
         </button>

@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.5",
-    "react": "^19.0.0",
+    "react": "^18.2.0",
     "react-circular-progressbar": "^2.1.0",
-    "react-dom": "^19.0.0",
+    "react-dom": "^18.2.0",
     "react-progress-bar-timer": "^0.3.4",
     "react-router-dom": "^7.1.5",
     "tailwindcss": "^4.0.5"
