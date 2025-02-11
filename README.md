@@ -39,7 +39,7 @@ To run this project locally:
    npm run dev
    ```
 
-3. Open the application in your browser at http://localhost:3000.
+3. Open the application in your browser at http://localhost:5173.
 
 ## Usage
 
