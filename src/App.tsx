@@ -5,7 +5,7 @@ import SideBar from "./Components/SideBar";
 import Timer from "./Components/Timer";
 function App() {
   return (
-    <div className="w-fit md:w-[760px] h-screen relative m-auto bg-white">
+    <div className="w-fit md:w-[760px] h-screen relative m-auto bg-white border-l border-r ">
       <div className="sticky top-0 bg-white">
         <NavBar></NavBar>
         <SideBar></SideBar>

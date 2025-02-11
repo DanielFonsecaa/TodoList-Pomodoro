@@ -119,7 +119,7 @@ const Home = () => {
           </div>
           <div className=" group relative">
             <input
-              className="w-25 outline-0 border-b-2 border-transparent focus:border-purple-500 transition-all duration-300"
+              className="w-32 outline-0 border-b-2 border-transparent focus:border-purple-500 transition-all duration-300"
               type="string"
               placeholder="Long Description"
               value={description}
@@ -129,7 +129,7 @@ const Home = () => {
           </div>
         </div>
         <button
-          className="text-white bg-purple-500 p-3 rounded-2xl hover:bg-purple-700 active:bg-purple-400 h-fit "
+          className="text-white bg-purple-500 p-3 rounded-2xl hover:bg-purple-600 active:bg-purple-400 h-fit hover:scale-105 transition-all duration-300 active:translate-y-5"
           onClick={addTask}
         >
           Add Task
@@ -168,7 +168,7 @@ const Home = () => {
             <p>{popupMessage}</p>
             <button
               onClick={() => setHasPopup(false)}
-              className="cursor-pointer mt-3 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700"
+              className="cursor-pointer mt-3 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700 transition-all duration-300 active:translate-y-5"
             >
               Close
             </button>
@@ -203,7 +203,7 @@ const Home = () => {
 
             <button
               onClick={closeViewTask}
-              className="cursor-pointer mt-3 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700"
+              className="cursor-pointer mt-3 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700 transition-all duration-300 active:translate-y-5"
             >
               Close
             </button>

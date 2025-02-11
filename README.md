@@ -1,50 +1,97 @@
-# React + TypeScript + Vite
+# To-Do List Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple to-do list application built with React, TypeScript, and Vite. The app features a timer, a sidebar for organizing tasks, and a flexible task management system.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Sidebar Navigation**:
+  - "To Do" section: Displays tasks that still need to be done.
+  - "Completed" section: Displays tasks that have been marked as completed.
+- **Task Management**:
 
-## Expanding the ESLint configuration
+  - Add new tasks with a name, deadline (in days), and an optional description.
+  - View task details, mark tasks as complete, or delete tasks.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Timer**:
+  - Use the timer to track work sessions.
+  - Play, pause, and reset the timer.
+  - A notification and sound alert when the timer runs out, indicating whether it’s time for a break or work.
 
-- Configure the top-level `parserOptions` property like this:
+## Live Demo
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+The app is deployed and can be accessed at:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+[https://listpomodoro.netlify.app/](https://listpomodoro.netlify.app/)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Installation
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+To run this project locally:
+
+1. Clone this repository:
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd <project-directory>
+   ```
+
+3. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open the application in your browser at http://localhost:3000.
+
+## Usage
+
+### Sidebar
+
+- The sidebar contains two options:
+  - **"To Do"**: Displays tasks that are not yet completed.
+  - **"Completed"**: Displays tasks that have been marked as completed.
+
+### Adding a Task
+
+1. Enter a name for the task.
+2. Optionally, change the task's deadline (in days).
+3. Optionally, provide a description of the task.
+4. Click **"Add"** to add the task to the list.
+
+### Task Details
+
+- If a task has a description, two buttons will appear:
+  - **View Details**: View the full description of the task.
+  - **Complete Task**: Mark the task as completed.
+
+### Completed Tasks
+
+- In the **Completed** section, each task has two buttons:
+  - **View Details**: View the task description.
+  - **Delete Task**: Remove the task from the completed list.
+
+### Timer
+
+- You can **play**, **pause**, and **reset** the timer, but the timer's value cannot be changed manually.
+- Once the timer reaches zero, a pop-up will appear and a sound will play to indicate whether it’s time for a break or work.
+
+## Technologies Used
+
+- **React**: Front-end library for building user interfaces.
+- **TypeScript**: Typed superset of JavaScript for better developer tooling.
+- **Vite**: Build tool that provides fast development server and optimized production build.
+- **CircularProgressBar**: Used to create a visually appealing timer.
+
+## Observations
+
+While working on this project, I didn’t have much prior experience with TypeScript. To overcome this, I took the initiative to learn more by watching tutorials on YouTube, which greatly helped me improve my understanding and implementation of TypeScript throughout the project.
