@@ -13,8 +13,8 @@ const TodoTask = ({
 }: Props) => {
   return (
     <>
-      <td className="text-center border-r px-4 py-2">{task.taskName}</td>
-      <td className="text-center border-r px-4 py-2">{task.deadline}</td>
+      <td className="text-center  px-4 py-2">{task.taskName}</td>
+      <td className="text-center  px-4 py-2">{task.deadline}</td>
       <td className="px-4 py-2 flex justify-evenly gap-2">
         {isCompleteAction ? (
           <button

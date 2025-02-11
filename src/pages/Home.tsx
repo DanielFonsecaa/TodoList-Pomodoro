@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { ITask } from "../Interface";
 import TodoTask from "../Components/TodoTask";
+import ScrollIndicator from "../Components/ScrollIndicator";
 
 const Home = () => {
   const [task, setTask] = useState<string>("");
   const [deadline, setDeadline] = useState<number>(1);
   const [todoList, setTodoList] = useState<ITask[]>([]);
 
+  const [taskToComplete, setTaskToComplete] = useState<string>();
   const [hasPopup, setHasPopup] = useState<boolean>(false);
   const [popupMessage, setPopupMessage] = useState<string>("");
 
@@ -33,6 +35,12 @@ const Home = () => {
     setTodoList(newList);
     setTask("");
     setDeadline(1);
+  };
+
+  const handleConfirmComplete = (taskName: string): void => {
+    setTaskToComplete(taskName);
+    setPopupMessage("Are you sure you want to complete this task ?");
+    setHasPopup(true);
   };
 
   const completeTask = (taskToComplete: string): void => {
@@ -67,7 +75,6 @@ const Home = () => {
         "completedTasks",
         JSON.stringify(updatedCompletedTasks)
       );
-
       localStorage.setItem("todoList", JSON.stringify(newList));
     }
   };
@@ -81,39 +88,37 @@ const Home = () => {
     }
   }, []);
   return (
-    <div className="m-auto w-full p-4">
+    <div className="m-auto w-full">
       <div className="flex lg:flex-row flex-col gap-3 items-center justify-evenly">
         <div className="capitalize flex gap-9">
           <div className="w-36 group relative">
-            <label className="text-black text-sm absolute -top-5 left-1">
+            <label className="text-black text-[.8em] absolute -top-5 left-1">
               Task Name
             </label>
             <input
-              className="w-36 outline-0 border-b-2 border-transparent bg-purple-200 rounded-2xl p-2 focus:border-purple-500 transition-all duration-300 border-b-purple-500 "
+              className="w-36 outline-0 bg-gray-200 rounded-full p-2"
               type="text"
-              placeholder="Do Homework"
+              placeholder="Ex: Homework"
               value={task}
               onChange={(e) => setTask(e.target.value)}
             />
-            <div className="absolute left-0 bottom-0 h-[2px] bg-purple-500 w-0 transition-all duration-500 group-hover:w-full"></div>
           </div>
 
           <div className="w-28 group relative">
-            <label className="text-black text-sm absolute -top-5 left-1">
+            <label className="text-black text-[.8em] absolute -top-5 left-1">
               Deadline (Days)
             </label>
             <input
-              className="w-14 outline-0 border-b-2 border-transparent bg-purple-200 rounded-2xl p-2 focus:border-purple-500 transition-all duration-300 border-b-purple-500"
+              className="w-14 outline-0 bg-gray-200 rounded-full p-2"
               type="number"
               placeholder="Days"
               value={deadline}
               onChange={(e) => setDeadline(Number(e.target.value))}
             />
-            <div className="absolute left-0 bottom-0 h-[2px] bg-purple-500 w-0 transition-all duration-500 group-hover:w-10"></div>
           </div>
         </div>
         <button
-          className="text-white bg-purple-500 p-3 rounded-2xl hover:bg-purple-600 active:bg-purple-400 h-fit hover:scale-105 transition-all duration-300 active:translate-y-5"
+          className="text-white bg-purple-500 p-3 rounded-full hover:bg-purple-600 active:bg-purple-400 h-fit hover:scale-105 transition-all duration-300 active:translate-y-5"
           onClick={addTask}
         >
           Add Task
@@ -124,17 +129,20 @@ const Home = () => {
         <table className="table-auto w-full divide-y divide-black border-collapse">
           <thead>
             <tr className="">
-              <th className="border-r px-4 py-2">Task Name</th>
-              <th className="border-r px-4 py-2">Deadline</th>
+              <th className="px-4 py-2">Task Name</th>
+              <th className="px-4 py-2">Deadline</th>
               <th className="px-4 py-2"></th>
             </tr>
           </thead>
           <tbody>
             {todoList.map((task: ITask, key: number) => (
-              <tr key={key} className="odd:bg-white even:bg-purple-100">
+              <tr
+                key={key}
+                className="odd:bg-white even:bg-purple-700 even:text-white"
+              >
                 <TodoTask
                   task={task}
-                  completionOrDeleteTask={completeTask}
+                  completionOrDeleteTask={handleConfirmComplete}
                   isCompleteAction={true}
                 />
               </tr>
@@ -145,17 +153,34 @@ const Home = () => {
 
       {hasPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 bg-black/45 ">
-          <div className="bg-white p-5 rounded-lg shadow-lg shadow-purple-500">
+          <div className="bg-white p-5 font-medium tracking-wider rounded-lg">
             <p>{popupMessage}</p>
-            <button
-              onClick={() => setHasPopup(false)}
-              className="cursor-pointer mt-3 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700 transition-all duration-300 active:translate-y-5"
-            >
-              Close
-            </button>
+            <div className="flex gap-3 mt-6">
+              {taskToComplete && (
+                <button
+                  onClick={() => {
+                    if (taskToComplete) {
+                      completeTask(taskToComplete);
+                      setHasPopup(false);
+                      setTaskToComplete(undefined);
+                    }
+                  }}
+                  className="px-4 py-2 cursor-pointer bg-purple-500 text-white rounded-lg hover:bg-purple-700"
+                >
+                  Yes, Delete
+                </button>
+              )}
+              <button
+                onClick={() => setHasPopup(false)}
+                className="px-4 py-2 cursor-pointer bg-gray-500 text-white rounded-lg hover:bg-gray-700"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}
+      <ScrollIndicator />
     </div>
   );
 };

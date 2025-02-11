@@ -1,10 +1,10 @@
 const SideBar = () => {
   return (
     <div className="w-full bg-purple-500 relative">
-      <ul className="capitalize flex justify-evenly items-center gap-5 mx-3 p-3 font-bold tracking-wider text-white">
+      <ul className="capitalize flex justify-evenly items-center gap-5 mx-3 p-3 text-lg font-bold tracking-widest text-white">
         <li
           className={`${
-            location.pathname === "/" ? "bg-purple-700 p-3 rounded-2xl" : ""
+            location.pathname === "/" ? "bg-purple-800 p-3 rounded-full" : ""
           }`}
         >
           <a href="/">to do</a>
@@ -12,7 +12,7 @@ const SideBar = () => {
         <li
           className={`${
             location.pathname === "/completed"
-              ? "bg-purple-700 p-3 rounded-2xl"
+              ? "bg-purple-800 p-3 rounded-full"
               : ""
           }`}
         >

@@ -127,11 +127,11 @@ const Timer = () => {
       </div>
       {hasPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 bg-black/45">
-          <div className="bg-white p-5 rounded-lg shadow-lg shadow-purple-500">
+          <div className="bg-white p-5 rounded-lg">
             <p>{popupMessage}</p>
             <button
               onClick={() => setHasPopup(false)}
-              className="mt-3 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700"
+              className="mt-3 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-700"
             >
               Close
             </button>
