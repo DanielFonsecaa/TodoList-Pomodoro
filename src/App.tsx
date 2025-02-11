@@ -5,17 +5,18 @@ import SideBar from "./Components/SideBar";
 import Timer from "./Components/Timer";
 function App() {
   return (
-    <div className="w-fit md:w-[760px] h-screen relative m-auto bg-white border-l border-r ">
-      <div className="sticky top-0 bg-white">
+    <div className="w-fit md:w-[60em] h-screen relative m-auto bg-white border-l border-r ">
+      <div className="sticky top-0 bg-white z-50">
         <NavBar></NavBar>
         <SideBar></SideBar>
       </div>
-      <div className="h-[30em] m-10">
-        <Outlet></Outlet>
-      </div>
-
-      <div className="p-10 bg-white">
-        <Timer></Timer>
+      <div className="flex sm:flex-row flex-col bg-white justify-center item">
+        <div className="p-10 bg-white">
+          <Timer></Timer>
+        </div>
+        <div className="m-10">
+          <Outlet></Outlet>
+        </div>
       </div>
     </div>
   );

@@ -4,21 +4,11 @@ import TodoTask from "../Components/TodoTask";
 
 const Home = () => {
   const [task, setTask] = useState<string>("");
-  const [deadline, setDeadline] = useState<number>(0);
-  const [description, setDescription] = useState<string>("");
+  const [deadline, setDeadline] = useState<number>(1);
   const [todoList, setTodoList] = useState<ITask[]>([]);
 
   const [hasPopup, setHasPopup] = useState<boolean>(false);
   const [popupMessage, setPopupMessage] = useState<string>("");
-  const [selectTask, setSelectTask] = useState<ITask | null>();
-
-  const viewTask = (task: ITask): void => {
-    console.log(task);
-    setSelectTask(task);
-  };
-  const closeViewTask = (): void => {
-    setSelectTask(null);
-  };
 
   const addTask = (): void => {
     if (!task) {
@@ -35,7 +25,6 @@ const Home = () => {
     const newTask = {
       taskName: task,
       deadline: deadline,
-      description: description,
     };
 
     const newList = [...todoList, newTask];
@@ -43,8 +32,7 @@ const Home = () => {
 
     setTodoList(newList);
     setTask("");
-    setDeadline(0);
-    setDescription("");
+    setDeadline(1);
   };
 
   const completeTask = (taskToComplete: string): void => {
@@ -93,39 +81,35 @@ const Home = () => {
     }
   }, []);
   return (
-    <div className="m-auto w-full">
-      <div className="flex p-6 items-center justify-evenly">
-        <div className="capitalize flex flex-col md:flex-row gap-10">
-          <div className="w-25 group relative">
+    <div className="m-auto w-full p-4">
+      <div className="flex lg:flex-row flex-col gap-3 items-center justify-evenly">
+        <div className="capitalize flex gap-9">
+          <div className="w-36 group relative">
+            <label className="text-black text-sm absolute -top-5 left-1">
+              Task Name
+            </label>
             <input
-              className="w-25 outline-0 border-b-2 border-transparent focus:border-purple-500 transition-all duration-300"
+              className="w-36 outline-0 border-b-2 border-transparent bg-purple-200 rounded-2xl p-2 focus:border-purple-500 transition-all duration-300 border-b-purple-500 "
               type="text"
-              placeholder="Name"
+              placeholder="Do Homework"
               value={task}
               onChange={(e) => setTask(e.target.value)}
             />
             <div className="absolute left-0 bottom-0 h-[2px] bg-purple-500 w-0 transition-all duration-500 group-hover:w-full"></div>
           </div>
 
-          <div className=" group relative">
+          <div className="w-28 group relative">
+            <label className="text-black text-sm absolute -top-5 left-1">
+              Deadline (Days)
+            </label>
             <input
-              className="w-10 outline-0 border-b-2 border-transparent focus:border-purple-500 transition-all duration-300"
+              className="w-14 outline-0 border-b-2 border-transparent bg-purple-200 rounded-2xl p-2 focus:border-purple-500 transition-all duration-300 border-b-purple-500"
               type="number"
               placeholder="Days"
               value={deadline}
               onChange={(e) => setDeadline(Number(e.target.value))}
             />
             <div className="absolute left-0 bottom-0 h-[2px] bg-purple-500 w-0 transition-all duration-500 group-hover:w-10"></div>
-          </div>
-          <div className=" group relative">
-            <input
-              className="w-32 outline-0 border-b-2 border-transparent focus:border-purple-500 transition-all duration-300"
-              type="string"
-              placeholder="Long Description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <div className="absolute left-0 bottom-0 h-[2px] bg-purple-500 w-0 transition-all duration-500 group-hover:w-full"></div>
           </div>
         </div>
         <button
@@ -136,7 +120,7 @@ const Home = () => {
         </button>
       </div>
 
-      <div className="h-64 sm:h-100 overflow-auto">
+      <div className=" overflow-auto mt-6">
         <table className="table-auto w-full divide-y divide-black border-collapse">
           <thead>
             <tr className="">
@@ -151,9 +135,6 @@ const Home = () => {
                 <TodoTask
                   task={task}
                   completionOrDeleteTask={completeTask}
-                  viewTask={
-                    task.description?.trim() ? () => viewTask(task) : () => {}
-                  }
                   isCompleteAction={true}
                 />
               </tr>
@@ -168,41 +149,6 @@ const Home = () => {
             <p>{popupMessage}</p>
             <button
               onClick={() => setHasPopup(false)}
-              className="cursor-pointer mt-3 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700 transition-all duration-300 active:translate-y-5"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
-      {selectTask && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/45 ">
-          <div className="bg-white p-5 rounded-lg shadow-lg shadow-purple-500 flex flex-col gap-6">
-            <h1 className="font-bold text-3xl">Task Details</h1>
-            <div className="flex flex-col">
-              <div className="">
-                <h2 className="inline text-xl font-bold">Task Name:</h2>
-
-                <h3 className="px-3 inline">{selectTask.taskName}</h3>
-              </div>
-
-              <div
-                className={` ${
-                  !selectTask.description?.trim() ? "hidden " : ""
-                }`}
-              >
-                <h2 className="inline text-xl font-bold ">Description:</h2>
-                <h3 className="inline px-3">{selectTask.description}</h3>
-              </div>
-
-              <div className="">
-                <h2 className=" inline text-xl font-bold">Deadline:</h2>
-                <h3 className="inline px-3">{selectTask.deadline} days</h3>
-              </div>
-            </div>
-
-            <button
-              onClick={closeViewTask}
               className="cursor-pointer mt-3 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700 transition-all duration-300 active:translate-y-5"
             >
               Close

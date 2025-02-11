@@ -60,7 +60,7 @@ const Timer = () => {
       if (timeLeftRef.current === 0) return handleSwitchMode();
 
       tick();
-    }, 10);
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -76,7 +76,7 @@ const Timer = () => {
   return (
     <div className="w-fit m-auto text-center">
       <h2 className="font-bold mb-5 text-2xl tracking-wider">
-        {isWork ? "Work Session" : "Break Session"}
+        {isWork ? "Work Time" : "Break Time"}
       </h2>
       <div className="">
         <CircularProgressbar
@@ -89,7 +89,7 @@ const Timer = () => {
           })}
         />
       </div>
-      <div className="flex gap-3 w-fit m-auto p-4">
+      <div className="flex justify-evenly pt-5">
         {isPaused ? (
           <button
             onClick={() => {

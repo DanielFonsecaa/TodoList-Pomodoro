@@ -4,7 +4,6 @@ import TodoTask from "../Components/TodoTask";
 
 const CompleteTask = () => {
   const [todoList, setTodoList] = useState<ITask[]>([]);
-  const [selectTask, setSelectTask] = useState<ITask | null>();
 
   const deleteTask = (taskToDelete: string): void => {
     const updatedTasks = todoList.filter(
@@ -12,14 +11,6 @@ const CompleteTask = () => {
     );
     localStorage.setItem("completedTasks", JSON.stringify(updatedTasks));
     setTodoList(updatedTasks);
-  };
-
-  const viewTask = (task: ITask): void => {
-    console.log(task);
-    setSelectTask(task);
-  };
-  const closeViewEdit = (): void => {
-    setSelectTask(null);
   };
 
   useEffect(() => {
@@ -48,46 +39,12 @@ const CompleteTask = () => {
               <TodoTask
                 task={task}
                 completionOrDeleteTask={deleteTask}
-                viewTask={() => viewTask(task)}
                 isCompleteAction={false}
               />
             </tr>
           ))}
         </tbody>
       </table>
-      {selectTask && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/45">
-          <div className="bg-white p-5 rounded-lg shadow-lg shadow-purple-500 flex flex-col gap-6">
-            <h1 className="font-bold text-3xl">Task Details</h1>
-            <div className="flex flex-col">
-              <div className="">
-                <h2 className="inline text-xl font-bold">Task Name:</h2>
-                <h3 className="px-3 inline">{selectTask.taskName}</h3>
-              </div>
-
-              <div
-                className={` ${
-                  !selectTask.description?.trim() ? "hidden " : ""
-                }`}
-              >
-                <h3 className="inline text-xl font-bold ">Description:</h3>
-                <h2 className="inline px-3">{selectTask.description}</h2>
-              </div>
-
-              <div className="">
-                <h3 className=" inline text-xl font-bold">Deadline:</h3>
-                <h2 className=" inline px-3">{selectTask.deadline} days</h2>
-              </div>
-            </div>
-            <button
-              onClick={closeViewEdit}
-              className="cursor-pointer mt-3 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
