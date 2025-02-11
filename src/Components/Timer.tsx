@@ -60,7 +60,7 @@ const Timer = () => {
       if (timeLeftRef.current === 0) return handleSwitchMode();
 
       tick();
-    }, 1000);
+    }, 10);
     return () => clearInterval(interval);
   }, []);
 
@@ -74,12 +74,11 @@ const Timer = () => {
   const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
 
   return (
-    <div className="flex flex-col w-screen mt-10">
-      <h1>Timer</h1>
-      <h2 className="w-fit m-auto font-bold mb-5 text-2xl tracking-wider">
+    <div className="w-fit m-auto text-center">
+      <h2 className="font-bold mb-5 text-2xl tracking-wider">
         {isWork ? "Work Session" : "Break Session"}
       </h2>
-      <div className="w-fit m-auto ">
+      <div className="">
         <CircularProgressbar
           value={percentage}
           text={formattedMinutes + ":" + formattedSeconds}

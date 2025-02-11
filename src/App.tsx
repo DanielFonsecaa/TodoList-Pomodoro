@@ -5,14 +5,19 @@ import SideBar from "./Components/SideBar";
 import Timer from "./Components/Timer";
 function App() {
   return (
-    <>
-      <NavBar></NavBar>
-      <SideBar></SideBar>
-      <div className="h-100">
+    <div className="w-fit md:w-[760px] h-screen relative m-auto bg-white">
+      <div className="sticky top-0 bg-white">
+        <NavBar></NavBar>
+        <SideBar></SideBar>
+      </div>
+      <div className="h-[33em]">
         <Outlet></Outlet>
       </div>
-      <Timer></Timer>
-    </>
+
+      <div className="p-10 bg-white">
+        <Timer></Timer>
+      </div>
+    </div>
   );
 }
 

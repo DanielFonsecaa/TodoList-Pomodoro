@@ -24,27 +24,23 @@ const CompleteTask = () => {
   }, []);
 
   return (
-    <div className="flex flex-col m-auto w-fit h-100 mt-7 overflow-auto ">
-      <div className="flex p-5">
-        <div className="flex">
-          <table className="table-auto w-full">
-            <thead>
-              <tr className="">
-                <th className=" px-4 py-2">Task Name</th>
-                <th className=" px-4 py-2">Deadline</th>
-                <th className="px-4 py-2"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {todoList.map((task: ITask, key: number) => (
-                <tr key={key} className="odd:bg-white even:bg-gray-100">
-                  <TodoTask task={task} completionOrDeleteTask={deleteTask} />
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <div className="m-auto w-full h-full overflow-auto mt-5">
+      <table className="table-auto w-full">
+        <thead>
+          <tr className="">
+            <th className=" px-4 py-2">Task Name</th>
+            <th className=" px-4 py-2">Deadline</th>
+            <th className="px-4 py-2"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {todoList.map((task: ITask, key: number) => (
+            <tr key={key} className="odd:bg-white even:bg-gray-100">
+              <TodoTask task={task} completionOrDeleteTask={deleteTask} />
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

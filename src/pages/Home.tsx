@@ -82,12 +82,13 @@ const Home = () => {
     }
   }, []);
   return (
-    <div className="flex flex-col m-auto w-fit h-100 mt-7 overflow-auto ">
-      <div className="flex p-5 ">
-        <div className="flex ">
-          <div>
-            <h1 className="capitalize">Task name</h1>
+    <div className="m-auto w-full ">
+      <div className="flex p-6 items-center justify-evenly">
+        <div className="capitalize flex flex-col md:flex-row gap-10">
+          <div className="w-25">
+            <h1>Task name</h1>
             <input
+              className="w-25"
               type="text"
               placeholder="Task name"
               value={task}
@@ -96,9 +97,10 @@ const Home = () => {
           </div>
 
           <div>
-            <h1 className="capitalize">task deadline in days</h1>
+            <h1>task deadline in days</h1>
 
             <input
+              className="w-10"
               type="number"
               placeholder="Deadline (in Days)"
               value={deadline}
@@ -106,9 +108,10 @@ const Home = () => {
             />
           </div>
           <div>
-            <h1 className="capitalize">Task description</h1>
+            <h1>Task description</h1>
 
             <input
+              className="w-25"
               type="string"
               placeholder="Description"
               value={description}
@@ -117,32 +120,32 @@ const Home = () => {
           </div>
         </div>
         <button
-          className="text-white bg-purple-500 p-5 rounded-2xl hover:bg-purple-700 active:bg-purple-400"
+          className="text-white bg-purple-500 p-5 rounded-2xl hover:bg-purple-700 active:bg-purple-400 h-fit "
           onClick={addTask}
         >
           Add Task
         </button>
       </div>
-      <div className="todoList">
-        <div className="todoList">
-          <table className="table-auto w-full">
-            <thead>
-              <tr className="">
-                <th className=" px-4 py-2">Task Name</th>
-                <th className=" px-4 py-2">Deadline</th>
-                <th className="px-4 py-2"></th>
+
+      <div className="h-64 sm:h-100 overflow-auto">
+        <table className="table-auto w-full">
+          <thead>
+            <tr className="">
+              <th className=" px-4 py-2">Task Name</th>
+              <th className=" px-4 py-2">Deadline</th>
+              <th className="px-4 py-2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {todoList.map((task: ITask, key: number) => (
+              <tr key={key} className="w-3 odd:bg-white even:bg-gray-100">
+                <TodoTask task={task} completionOrDeleteTask={completeTask} />
               </tr>
-            </thead>
-            <tbody>
-              {todoList.map((task: ITask, key: number) => (
-                <tr key={key} className="odd:bg-white even:bg-gray-100">
-                  <TodoTask task={task} completionOrDeleteTask={completeTask} />
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
+
       {hasPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
           <div className="bg-white p-5 rounded-lg shadow-lg">
