@@ -110,7 +110,9 @@ const Home = () => {
 
           <div>
             <input
-              className="outline-0 bg-[#F5F5F5] rounded-full gap-2 p-2 w-full flex flex-row justify-center text-gray-400"
+              className={`outline-0 bg-[#F5F5F5] rounded-full gap-2 p-2 w-full flex flex-row justify-center ${
+                deadline ? "text-black" : "text-[#7a7a7a]"
+              }`}
               type="date"
               min={new Date().toISOString().split("T")[0]}
               value={deadline ? deadline.toISOString().split("T")[0] : ""}
