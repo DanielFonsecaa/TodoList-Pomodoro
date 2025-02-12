@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const Home = () => {
   const [task, setTask] = useState<string>("");
-  const [deadline, setDeadline] = useState<Date>(new Date());
+  const [deadline, setDeadline] = useState<Date | null>();
   const [todoList, setTodoList] = useState<ITask[]>([]);
 
   const [taskToComplete, setTaskToComplete] = useState<string>();
@@ -19,6 +19,12 @@ const Home = () => {
       setHasPopup(true);
       return;
     }
+    if (!deadline) {
+      setPopupMessage("Please select a Deadline!");
+      setHasPopup(true);
+      return;
+    }
+
     if (todoList.some((t) => t.taskName === task)) {
       setPopupMessage("Task with the same name already exists!");
       setHasPopup(true);
@@ -35,7 +41,7 @@ const Home = () => {
 
     setTodoList(newList);
     setTask("");
-    setDeadline(new Date());
+    setDeadline(null);
   };
 
   const handleConfirmComplete = (taskName: string): void => {
@@ -104,11 +110,11 @@ const Home = () => {
 
           <div>
             <input
-              className="outline-0 bg-[#F5F5F5] rounded-full gap-2 p-2 w-full flex flex-row justify-center"
-              type="Date"
-              placeholder="Days"
+              className="outline-0 bg-[#F5F5F5] rounded-full gap-2 p-2 w-full flex flex-row justify-center text-gray-400"
+              type="date"
               min={new Date().toISOString().split("T")[0]}
-              value={deadline.toISOString().split("T")[0]}
+              value={deadline ? deadline.toISOString().split("T")[0] : ""}
+              placeholder="Select a date"
               onChange={(e) => setDeadline(new Date(e.target.value))}
             />
           </div>
@@ -142,7 +148,7 @@ const Home = () => {
       >
         <table className="table-auto w-full divide-y divide-black border-collapse">
           <thead>
-            <tr className="font-serif">
+            <tr>
               <th>Task Name</th>
               <th>Due Date</th>
               <th></th>

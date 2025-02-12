@@ -41,9 +41,9 @@ const CompleteTask = () => {
     >
       <table className="table-auto w-full divide-y divide-black">
         <thead className={todoList.length === 0 ? "" : "rounded-t-3xl"}>
-          <tr className="font-serif">
-            <th>Task Name</th>
-            <th>Duo Date</th>
+          <tr>
+            <th className="lg:px-10">Task Name</th>
+            <th className="lg:px-10">Duo Date</th>
             <th></th>
           </tr>
         </thead>
