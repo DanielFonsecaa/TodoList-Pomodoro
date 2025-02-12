@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { ITask } from "../Interface";
 import TodoTask from "../Components/TodoTask";
+import { motion } from "framer-motion";
+import ScrollIndicator from "../Components/ScrollIndicator";
 
 const CompleteTask = () => {
   const [todoList, setTodoList] = useState<ITask[]>([]);
@@ -34,10 +36,10 @@ const CompleteTask = () => {
   }, []);
 
   return (
-    <div className="m-auto w-full h-full overflow-auto">
+    <div className="m-auto w-full h-full overflow-auto shadow-black/5 shadow-xl rounded-3xl">
       <table className="table-auto w-full divide-y divide-black">
         <thead>
-          <tr className="">
+          <tr className="font-serif">
             <th className="px-4 py-2">Task Name</th>
             <th className="px-4 py-2">Deadline</th>
             <th className="px-4 py-2"></th>
@@ -45,20 +47,27 @@ const CompleteTask = () => {
         </thead>
         <tbody>
           {todoList.map((task: ITask, key: number) => (
-            <tr key={key} className=" odd:bg-white even:bg-purple-700">
+            <motion.tr
+              key={key}
+              initial={{ opacity: 0, y: -100 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -100 }}
+              transition={{ duration: 0.5 }}
+              className="odd:bg-[#EAEAEA] even:bg-purple-700 even:text-white"
+            >
               <TodoTask
                 task={task}
                 completionOrDeleteTask={handleConfirmDelete}
                 isCompleteAction={false}
               />
-            </tr>
+            </motion.tr>
           ))}
         </tbody>
       </table>
 
       {hasPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 bg-black/45 ">
-          <div className="bg-white p-5 font-medium tracking-wider rounded-lg">
+          <div className="bg-[#EAEAEA] p-5 text-lg tracking-wide rounded-lg">
             <p>{popupMessage}</p>
             <div className="flex gap-3 mt-6">
               <button
@@ -76,7 +85,7 @@ const CompleteTask = () => {
 
               <button
                 onClick={() => setHasPopup(false)}
-                className="px-4 py-2 cursor-pointer bg-gray-500 text-white rounded-lg hover:bg-gray-700"
+                className="px-4 py-2 cursor-pointer bg-gray-400 text-white rounded-lg hover:bg-gray-500"
               >
                 Close
               </button>
@@ -84,6 +93,7 @@ const CompleteTask = () => {
           </div>
         </div>
       )}
+      <ScrollIndicator />
     </div>
   );
 };

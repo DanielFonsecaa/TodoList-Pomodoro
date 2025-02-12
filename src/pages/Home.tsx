@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ITask } from "../Interface";
 import TodoTask from "../Components/TodoTask";
 import ScrollIndicator from "../Components/ScrollIndicator";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const [task, setTask] = useState<string>("");
@@ -92,11 +93,11 @@ const Home = () => {
       <div className="flex lg:flex-row flex-col gap-3 items-center justify-evenly">
         <div className="capitalize flex gap-9">
           <div className="w-36 group relative">
-            <label className="text-black text-[.8em] absolute -top-5 left-1">
+            <label className="text-black tracking-wide text-[.8em] absolute -top-5 left-1">
               Task Name
             </label>
             <input
-              className="w-36 outline-0 bg-gray-200 rounded-full p-2"
+              className="w-36 outline-0 bg-[#F5F5F5] rounded-full p-2"
               type="text"
               placeholder="Ex: Homework"
               value={task}
@@ -105,11 +106,11 @@ const Home = () => {
           </div>
 
           <div className="w-28 group relative">
-            <label className="text-black text-[.8em] absolute -top-5 left-1">
+            <label className="text-black tracking-wide text-[.8em] absolute -top-5 left-1">
               Deadline (Days)
             </label>
             <input
-              className="w-14 outline-0 bg-gray-200 rounded-full p-2"
+              className="w-14 outline-0 bg-[#F5F5F5] rounded-full p-2"
               type="number"
               placeholder="Days"
               value={deadline}
@@ -118,17 +119,31 @@ const Home = () => {
           </div>
         </div>
         <button
-          className="text-white bg-purple-500 p-3 rounded-full hover:bg-purple-600 active:bg-purple-400 h-fit hover:scale-105 transition-all duration-300 active:translate-y-5"
+          className="text-white font-bold tracking-wider flex gap-2 bg-purple-500 p-5 rounded-full hover:bg-purple-600 active:bg-purple-400 h-fit hover:scale-105 transition-all duration-300 active:translate-y-5"
           onClick={addTask}
         >
-          Add Task
+          <span>Add Task</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="white"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
         </button>
       </div>
 
-      <div className=" overflow-auto mt-6">
+      <div className=" overflow-auto mt-6 shadow-black/5 shadow-xl rounded-3xl">
         <table className="table-auto w-full divide-y divide-black border-collapse">
           <thead>
-            <tr className="">
+            <tr className="font-serif">
               <th className="px-4 py-2">Task Name</th>
               <th className="px-4 py-2">Deadline</th>
               <th className="px-4 py-2"></th>
@@ -136,16 +151,20 @@ const Home = () => {
           </thead>
           <tbody>
             {todoList.map((task: ITask, key: number) => (
-              <tr
+              <motion.tr
                 key={key}
-                className="odd:bg-white even:bg-purple-700 even:text-white"
+                initial={{ opacity: 0, y: -100 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -100 }}
+                transition={{ duration: 0.5 }}
+                className="odd:bg-[#EAEAEA] even:bg-purple-700 even:text-white"
               >
                 <TodoTask
                   task={task}
                   completionOrDeleteTask={handleConfirmComplete}
                   isCompleteAction={true}
                 />
-              </tr>
+              </motion.tr>
             ))}
           </tbody>
         </table>
@@ -153,7 +172,7 @@ const Home = () => {
 
       {hasPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 bg-black/45 ">
-          <div className="bg-white p-5 font-medium tracking-wider rounded-lg">
+          <div className="bg-[#EAEAEA] text-lg p-5 tracking-wider rounded-lg">
             <p>{popupMessage}</p>
             <div className="flex gap-3 mt-6">
               {taskToComplete && (
@@ -167,12 +186,15 @@ const Home = () => {
                   }}
                   className="px-4 py-2 cursor-pointer bg-purple-500 text-white rounded-lg hover:bg-purple-700"
                 >
-                  Yes, Delete
+                  Yes, Complete
                 </button>
               )}
               <button
-                onClick={() => setHasPopup(false)}
-                className="px-4 py-2 cursor-pointer bg-gray-500 text-white rounded-lg hover:bg-gray-700"
+                onClick={() => {
+                  setHasPopup(false);
+                  setTaskToComplete(undefined);
+                }}
+                className="px-4 py-2 cursor-pointer bg-gray-400 text-white rounded-lg hover:bg-gray-500"
               >
                 Close
               </button>

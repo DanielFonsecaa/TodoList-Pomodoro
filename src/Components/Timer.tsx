@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Timer = () => {
   const workMinutes = 25;
@@ -60,7 +61,7 @@ const Timer = () => {
       if (timeLeftRef.current === 0) return handleSwitchMode();
 
       tick();
-    }, 1000);
+    }, 10);
     return () => clearInterval(interval);
   }, []);
 
@@ -75,42 +76,85 @@ const Timer = () => {
 
   return (
     <div className="w-fit m-auto text-center">
-      <h2 className="font-bold mb-5 text-2xl tracking-wider">
+      <h2 className=" mb-5 text-2xl tracking-wider">
         {isWork ? "Work Time" : "Break Time"}
       </h2>
-      <div className="">
+      <div className="font-sans font-bold tracking-wider">
         <CircularProgressbar
           value={percentage}
           text={formattedMinutes + ":" + formattedSeconds}
           styles={buildStyles({
-            textColor: isWork ? "#a751fb" : "#00ffd7",
-            pathColor: isWork ? "#a751fb" : "#00ffd7",
-            trailColor: "#f9f9f9",
+            textColor: isWork ? "#6a2d99" : "#8E5A8D",
+            pathColor: isWork ? "#6a2d99" : "#8E5A8D",
+            trailColor: "#DADADA",
           })}
         />
       </div>
       <div className="flex justify-evenly pt-5">
-        {isPaused ? (
-          <button
-            onClick={() => {
-              setIsPaused(false);
-              isPausedRef.current = false;
-            }}
-            className="cursor-pointer bg-purple-500 text-white rounded-lg hover:bg-purple-700 active:bg-purple-300 p-4 transition-all duration-300 active:translate-y-5"
-          >
-            Start
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              setIsPaused(true);
-              isPausedRef.current = true;
-            }}
-            className="cursor-pointer bg-purple-500 text-white rounded-lg hover:bg-purple-700  active:bg-purple-300 p-4 transition-all duration-300 active:translate-y-5"
-          >
-            Pause
-          </button>
-        )}
+        <AnimatePresence mode="wait">
+          {isPaused ? (
+            <motion.button
+              key="play" // Unique key for Framer Motion to track animations
+              onClick={() => {
+                setIsPaused(false);
+                isPausedRef.current = false;
+              }}
+              className="cursor-pointer text-purple-700 hover:scale-110"
+              initial={{ opacity: 0, scale: 0.8, rotate: -90 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              exit={{ opacity: 0, scale: 0.8, rotate: 90 }}
+              transition={{ duration: 0.3 }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-20"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"
+                />
+              </svg>
+            </motion.button>
+          ) : (
+            <motion.button
+              key="pause" // Unique key for Framer Motion to track animations
+              onClick={() => {
+                setIsPaused(true);
+                isPausedRef.current = true;
+              }}
+              className="cursor-pointer text-purple-700 hover:scale-110"
+              initial={{ opacity: 0, scale: 0.8, rotate: 90 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              exit={{ opacity: 0, scale: 0.8, rotate: -90 }}
+              transition={{ duration: 0.3 }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-20"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M14.25 9v6m-4.5 0V9M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+            </motion.button>
+          )}
+        </AnimatePresence>
 
         <button
           onClick={() => {
@@ -120,14 +164,27 @@ const Timer = () => {
             setIsPaused(true);
             isPausedRef.current = true;
           }}
-          className="cursor-pointer bg-purple-500 text-white rounded-lg hover:bg-purple-700  active:bg-purple-300 p-4 transition-all duration-300 active:translate-x-5"
+          className="cursor-pointer text-purple-700 hover:scale-110 active:rotate-180 transition-all duration-300"
         >
-          Reset
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-20"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+            />
+          </svg>
         </button>
       </div>
       {hasPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 bg-black/45">
-          <div className="bg-white p-5 rounded-lg">
+          <div className="bg-[#C0C0C0] p-5 rounded-lg">
             <p>{popupMessage}</p>
             <button
               onClick={() => setHasPopup(false)}
