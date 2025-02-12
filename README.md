@@ -9,7 +9,7 @@ A simple to-do list application built with React, TypeScript, and Vite. The app 
   - "Completed" section: Displays tasks that have been marked as completed.
 - **Task Management**:
 
-  - Add new tasks with a name, deadline (in days), and an optional description.
+  - Add new tasks with a name and a deadline (in days).
   - View task details, mark tasks as complete, or delete tasks.
 
 - **Timer**:
@@ -53,20 +53,9 @@ To run this project locally:
 
 1. Enter a name for the task.
 2. Optionally, change the task's deadline (in days).
-3. Optionally, provide a description of the task.
-4. Click **"Add"** to add the task to the list.
+3. Click **"Add"** to add the task to the list.
 
-### Task Details
 
-- If a task has a description, two buttons will appear:
-  - **View Details**: View the full description of the task.
-  - **Complete Task**: Mark the task as completed.
-
-### Completed Tasks
-
-- In the **Completed** section, each task has two buttons:
-  - **View Details**: View the task description.
-  - **Delete Task**: Remove the task from the completed list.
 
 ### Timer
 
