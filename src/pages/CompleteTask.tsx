@@ -29,10 +29,8 @@ const CompleteTask = () => {
     const tasks = localStorage.getItem("completedTasks");
     if (tasks !== null) {
       const parsedTasks = JSON.parse(tasks);
-      console.log("parsedTasks", parsedTasks);
       setTodoList(parsedTasks);
     }
-    console.log(tasks);
   }, []);
 
   return (
@@ -44,9 +42,9 @@ const CompleteTask = () => {
       <table className="table-auto w-full divide-y divide-black">
         <thead className={todoList.length === 0 ? "" : "rounded-t-3xl"}>
           <tr className="font-serif">
-            <th className="lg:px-14 ">Task Name</th>
-            <th className="lg:px-14 ">Duo Date</th>
-            <th className="lg:px-14 "></th>
+            <th>Task Name</th>
+            <th>Duo Date</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

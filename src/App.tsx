@@ -6,11 +6,11 @@ import Timer from "./Components/Timer";
 function App() {
   return (
     <div className="w-fit md:w-[60em] h-screen relative m-auto bg-[#EAEAEA]">
-      <div className="sticky top-0 bg-[#EAEAEA] z-50">
+      <div className="sticky top-0 z-50 bg-[#EAEAEA]">
         <NavBar></NavBar>
         <SideBar></SideBar>
       </div>
-      <div className="flex sm:flex-row flex-col bg-[#EAEAEA] ">
+      <div className="flex sm:flex-row flex-col justify-center bg-[#EAEAEA]">
         <div className="p-10 ">
           <Timer></Timer>
         </div>

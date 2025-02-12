@@ -22,7 +22,6 @@ const Timer = () => {
     setTimeLeft(timeLeftRef.current);
   };
   const playSoundAndPopup = () => {
-    console.log("ISwORKS", isWork);
     const audio = isWorkRef.current
       ? new Audio("/backToWork.mp3")
       : new Audio("/coffe.mp3");
@@ -61,7 +60,7 @@ const Timer = () => {
       if (timeLeftRef.current === 0) return handleSwitchMode();
 
       tick();
-    }, 10);
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 

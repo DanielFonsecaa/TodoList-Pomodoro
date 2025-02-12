@@ -24,14 +24,14 @@ const TodoTask = ({
   return (
     <>
       <td
-        className={`text-center tracking-widest px-4 py-2 ${
+        className={`text-center tracking-widest px-2 ${
           isPastOrToday(new Date(task.deadline)) ? "text-red-500" : ""
         }`}
       >
         {task.taskName}
       </td>
       <td
-        className={`text-center tracking-widest px-4 py-2 ${
+        className={`text-center tracking-widest ${
           isPastOrToday(new Date(task.deadline)) ? "text-red-500" : ""
         }`}
       >

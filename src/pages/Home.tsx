@@ -82,7 +82,6 @@ const Home = () => {
 
   useEffect(() => {
     const tasks = localStorage.getItem("todoList");
-    console.log(tasks);
     if (tasks !== null) {
       const parsedTasks = JSON.parse(tasks);
       setTodoList(parsedTasks);
