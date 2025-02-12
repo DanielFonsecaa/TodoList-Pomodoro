@@ -122,7 +122,7 @@ const Home = () => {
           </div>
         </div>
         <button
-          className="text-white font-bold tracking-wider flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-purple-500 transition-all duration-300 hover:bg-purple-600 hover:scale-105 active:translate-y-5"
+          className="text-white font-bold tracking-wider flex items-center justify-center gap-2 w-full px-2 py-2 rounded-full bg-purple-500 transition-all duration-300 hover:bg-purple-600 hover:scale-105 active:translate-y-5"
           onClick={addTask}
         >
           <span>Add Task</span>
