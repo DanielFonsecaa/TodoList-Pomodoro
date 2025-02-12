@@ -36,13 +36,17 @@ const CompleteTask = () => {
   }, []);
 
   return (
-    <div className="m-auto w-full h-full overflow-auto shadow-black/5 shadow-xl rounded-3xl">
+    <div
+      className={`m-auto w-full overflow-auto shadow-black/5 ${
+        todoList.length === 0 ? "" : "rounded-3xl shadow-xl "
+      }`}
+    >
       <table className="table-auto w-full divide-y divide-black">
-        <thead>
+        <thead className={todoList.length === 0 ? "" : "rounded-t-3xl"}>
           <tr className="font-serif">
-            <th className="px-4 py-2">Task Name</th>
-            <th className="px-4 py-2">Deadline</th>
-            <th className="px-4 py-2"></th>
+            <th className="lg:px-14 ">Task Name</th>
+            <th className="lg:px-14 ">Duo Date</th>
+            <th className="lg:px-14 "></th>
           </tr>
         </thead>
         <tbody>

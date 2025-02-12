@@ -79,7 +79,7 @@ const Timer = () => {
       <h2 className=" mb-5 text-2xl tracking-wider">
         {isWork ? "Work Time" : "Break Time"}
       </h2>
-      <div className="font-sans font-bold tracking-wider">
+      <div className="font-sans  font-bold tracking-wider">
         <CircularProgressbar
           value={percentage}
           text={formattedMinutes + ":" + formattedSeconds}
@@ -87,6 +87,7 @@ const Timer = () => {
             textColor: isWork ? "#6a2d99" : "#8E5A8D",
             pathColor: isWork ? "#6a2d99" : "#8E5A8D",
             trailColor: "#DADADA",
+            strokeLinecap: "butt",
           })}
         />
       </div>

@@ -11,23 +11,34 @@ const TodoTask = ({
   completionOrDeleteTask,
   isCompleteAction,
 }: Props) => {
+  const isPastOrToday = (deadline: Date): boolean => {
+    const today = new Date();
+    // Set time to midnight for both today and deadline to ignore the time part
+    today.setHours(0, 0, 0, 0);
+    const deadlineLocal = new Date(deadline);
+    deadlineLocal.setHours(0, 0, 0, 0);
+
+    return deadlineLocal <= today;
+  };
+
   return (
     <>
       <td
         className={`text-center tracking-widest px-4 py-2 ${
-          task.deadline === 0 ? "text-red-500" : ""
+          isPastOrToday(new Date(task.deadline)) ? "text-red-500" : ""
         }`}
       >
         {task.taskName}
       </td>
       <td
         className={`text-center tracking-widest px-4 py-2 ${
-          task.deadline === 0 ? "text-red-500" : ""
+          isPastOrToday(new Date(task.deadline)) ? "text-red-500" : ""
         }`}
       >
-        {task.deadline === 0
-          ? "Today"
-          : `${task.deadline} ${task.deadline === 1 ? "Day" : "Days"}`}
+        {new Date(task.deadline).toLocaleDateString("en-US", {
+          month: "short",
+          day: "2-digit",
+        })}
       </td>
       <td className="px-4 py-2 flex justify-evenly gap-2">
         {isCompleteAction ? (
@@ -45,7 +56,7 @@ const TodoTask = ({
             >
               <path
                 className={
-                  task.deadline === 0 ? "stroke-red-500" : "stroke-current"
+                  isPastOrToday(new Date(task.deadline)) ? "stroke-red-500" : ""
                 }
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -67,6 +78,9 @@ const TodoTask = ({
               className="size-7 hover:scale-110"
             >
               <path
+                className={
+                  isPastOrToday(new Date(task.deadline)) ? "stroke-red-500" : ""
+                }
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"

@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const Home = () => {
   const [task, setTask] = useState<string>("");
-  const [deadline, setDeadline] = useState<number>(1);
+  const [deadline, setDeadline] = useState<Date>(new Date());
   const [todoList, setTodoList] = useState<ITask[]>([]);
 
   const [taskToComplete, setTaskToComplete] = useState<string>();
@@ -27,7 +27,7 @@ const Home = () => {
 
     const newTask = {
       taskName: task,
-      deadline: deadline,
+      deadline: deadline || new Date(),
     };
 
     const newList = [...todoList, newTask];
@@ -35,7 +35,7 @@ const Home = () => {
 
     setTodoList(newList);
     setTask("");
-    setDeadline(1);
+    setDeadline(new Date());
   };
 
   const handleConfirmComplete = (taskName: string): void => {
@@ -88,38 +88,34 @@ const Home = () => {
       setTodoList(parsedTasks);
     }
   }, []);
+
   return (
     <div className="m-auto w-full">
-      <div className="flex lg:flex-row flex-col gap-3 items-center justify-evenly">
-        <div className="capitalize flex gap-9">
-          <div className="w-36 group relative">
-            <label className="text-black tracking-wide text-[.8em] absolute -top-5 left-1">
-              Task Name
-            </label>
+      <div className="flex lg:flex-row flex-col lg:gap-10 gap-3">
+        <div className="capitalize flex lg:flex-row flex-col lg:items-center gap-3">
+          <div>
             <input
-              className="w-36 outline-0 bg-[#F5F5F5] rounded-full p-2"
+              className="outline-0 bg-[#F5F5F5] rounded-full text-center p-2 lg:w-40 w-full"
               type="text"
-              placeholder="Ex: Homework"
+              placeholder="Task Name"
               value={task}
               onChange={(e) => setTask(e.target.value)}
             />
           </div>
 
-          <div className="w-28 group relative">
-            <label className="text-black tracking-wide text-[.8em] absolute -top-5 left-1">
-              Deadline (Days)
-            </label>
+          <div>
             <input
-              className="w-14 outline-0 bg-[#F5F5F5] rounded-full p-2"
-              type="number"
+              className="outline-0 bg-[#F5F5F5] rounded-full gap-2 p-2 w-full flex flex-row justify-center"
+              type="Date"
               placeholder="Days"
-              value={deadline}
-              onChange={(e) => setDeadline(Number(e.target.value))}
+              min={new Date().toISOString().split("T")[0]}
+              value={deadline.toISOString().split("T")[0]}
+              onChange={(e) => setDeadline(new Date(e.target.value))}
             />
           </div>
         </div>
         <button
-          className="text-white font-bold tracking-wider flex gap-2 bg-purple-500 p-5 rounded-full hover:bg-purple-600 active:bg-purple-400 h-fit hover:scale-105 transition-all duration-300 active:translate-y-5"
+          className="text-white font-bold tracking-wider flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-purple-500 transition-all duration-300 hover:bg-purple-600 hover:scale-105 active:translate-y-5"
           onClick={addTask}
         >
           <span>Add Task</span>
@@ -140,13 +136,17 @@ const Home = () => {
         </button>
       </div>
 
-      <div className=" overflow-auto mt-6 shadow-black/5 shadow-xl rounded-3xl">
+      <div
+        className={`m-auto mt-6 w-full overflow-auto shadow-black/5 ${
+          todoList.length === 0 ? "" : "rounded-3xl shadow-xl "
+        }`}
+      >
         <table className="table-auto w-full divide-y divide-black border-collapse">
           <thead>
             <tr className="font-serif">
-              <th className="px-4 py-2">Task Name</th>
-              <th className="px-4 py-2">Deadline</th>
-              <th className="px-4 py-2"></th>
+              <th>Task Name</th>
+              <th>Due Date</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
